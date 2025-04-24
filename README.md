@@ -1,4 +1,4 @@
-# Distributed Camera Monitoring System
+# Cognex Cameras Monitoring System
 
 A FastAPI-based solution for monitoring the status of networked cameras across multiple agents, providing real-time updates and a centralized web interface for visualization.
 
