@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Monitoring</title>
-    <script>
-        async function fetchStatus() {
-            try {
-                let response = await fetch("/status");
-                let data = await response.json();
-                document.getElementById('status-output').innerText = JSON.stringify(data, null, 4);
-            } catch (error) {
-                document.getElementById('status-output').innerText = "Error: " + error;
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <title>Camera Dashboard</title>
+  <script>
+    async function fetchStatus() {
+      try {
+        const res = await fetch("/status");
+        const data = await res.json();
+        document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        console.error("Fetch error:", e);
+      }
+    }
+    // Fetch immediately on load and then every 2s :contentReference[oaicite:3]{index=3}
+    window.addEventListener("load", () => {
+      fetchStatus();
+      setInterval(fetchStatus, 2000);
+    });
+  </script>
 </head>
 <body>
-    <h1>Camera Monitoring</h1>
-    <button onclick="fetchStatus()">Get Camera Status</button>
-    <pre id="status-output">Status will be displayed here...</pre>
+  <h1>Camera Monitoring Dashboard</h1>
+  <pre id="output">Loading...</pre>
 </body>
 </html>
-
